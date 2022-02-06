@@ -14,6 +14,50 @@ class DeliveryColors {
 
 final deliveryGradiant = [DeliveryColors.green, DeliveryColors.purple];
 
+final _borderLigth = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(10),
+    borderSide: BorderSide(
+        color: DeliveryColors.veryLigthGrey,
+        width: 2,
+        style: BorderStyle.solid));
+
+final _borderDark = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(10),
+    borderSide: BorderSide(
+        color: DeliveryColors.grey, width: 2, style: BorderStyle.solid));
+
 final ligthTheme = ThemeData(
+    canvasColor: DeliveryColors.white,
+    scaffoldBackgroundColor: DeliveryColors.white,
     textTheme: GoogleFonts.poppinsTextTheme().apply(
-        bodyColor: DeliveryColors.white, displayColor: DeliveryColors.white));
+        bodyColor: DeliveryColors.purple, displayColor: DeliveryColors.purple),
+    inputDecorationTheme: InputDecorationTheme(
+        border: _borderLigth,
+        enabledBorder: _borderLigth,
+        focusedBorder: _borderLigth,
+        contentPadding: EdgeInsets.zero,
+        labelStyle: TextStyle(color: DeliveryColors.purple),
+        hintStyle:
+            GoogleFonts.poppins(color: DeliveryColors.ligthGrey, fontSize: 10)),
+    iconTheme: IconThemeData(color: DeliveryColors.purple),
+    colorScheme:
+        ColorScheme.fromSwatch().copyWith(secondary: DeliveryColors.purple));
+
+final darkTheme = ThemeData(
+    canvasColor: DeliveryColors.grey,
+    scaffoldBackgroundColor: DeliveryColors.dark,
+    textTheme: GoogleFonts.poppinsTextTheme().apply(
+        bodyColor: DeliveryColors.green, displayColor: DeliveryColors.green),
+    inputDecorationTheme: InputDecorationTheme(
+        border: _borderDark,
+        enabledBorder: _borderDark,
+        focusedBorder: _borderDark,
+        contentPadding: EdgeInsets.zero,
+        labelStyle: TextStyle(color: DeliveryColors.white),
+        filled: true,
+        fillColor: DeliveryColors.grey,
+        hintStyle:
+            GoogleFonts.poppins(color: DeliveryColors.white, fontSize: 10)),
+    iconTheme: IconThemeData(color: DeliveryColors.white),
+    colorScheme:
+        ColorScheme.fromSwatch().copyWith(secondary: DeliveryColors.white));
