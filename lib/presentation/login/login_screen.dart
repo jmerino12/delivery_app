@@ -1,3 +1,4 @@
+import 'package:delivery_app/presentation/home/home_screen.dart';
 import 'package:delivery_app/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -121,11 +122,17 @@ class LoginScreen extends StatelessWidget {
                       end: Alignment.centerLeft)),
               child: Padding(
                 padding: const EdgeInsets.all(14),
-                child: Text(
-                  "Login",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.caption!.copyWith(
-                      fontWeight: FontWeight.bold, color: Colors.white),
+                child: InkWell(
+                  onTap: (() {
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (_) => HomeScreen()));
+                  }),
+                  child: Text(
+                    "Login",
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.caption!.copyWith(
+                        fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
                 ),
               ),
             ),

@@ -1,3 +1,4 @@
+import 'package:delivery_app/presentation/home/home_screen.dart';
 import 'package:delivery_app/presentation/splash/splash_screen.dart';
 import 'package:delivery_app/theme.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ligthTheme,
-        home: SplashScreen());
+        theme: darkTheme,
+        home: HomeScreen());
   }
 }
