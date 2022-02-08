@@ -1,5 +1,6 @@
 import 'package:delivery_app/presentation/home/cart/cart_screen.dart';
 import 'package:delivery_app/presentation/home/products/products_screen.dart';
+import 'package:delivery_app/presentation/home/profile/profile_screen.dart';
 import 'package:delivery_app/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
               Text('currentInd: $currentIndex'),
-              Text('currentInd: $currentIndex'),
+              ProfileScreen()
             ],
           )),
           _DeliveryNavigationBar(
