@@ -28,7 +28,15 @@ final _borderDark = OutlineInputBorder(
 
 final ligthTheme = ThemeData(
     canvasColor: DeliveryColors.white,
-    appBarTheme: AppBarTheme(color: DeliveryColors.white),
+    appBarTheme: AppBarTheme(
+        color: DeliveryColors.white,
+        toolbarTextStyle: GoogleFonts.poppinsTextTheme()
+            .apply(displayColor: DeliveryColors.purple)
+            .bodyText2,
+        titleTextStyle: GoogleFonts.poppinsTextTheme().headline6!.copyWith(
+            fontSize: 20,
+            color: DeliveryColors.purple,
+            fontWeight: FontWeight.bold)),
     bottomAppBarColor: DeliveryColors.veryLigthGrey,
     scaffoldBackgroundColor: DeliveryColors.white,
     textTheme: GoogleFonts.poppinsTextTheme().apply(
@@ -47,7 +55,15 @@ final ligthTheme = ThemeData(
 
 final darkTheme = ThemeData(
     canvasColor: DeliveryColors.grey,
-    appBarTheme: AppBarTheme(color: DeliveryColors.purple),
+    appBarTheme: AppBarTheme(
+        color: DeliveryColors.purple,
+        toolbarTextStyle: GoogleFonts.poppinsTextTheme()
+            .apply(displayColor: DeliveryColors.purple)
+            .bodyText2,
+        titleTextStyle: GoogleFonts.poppinsTextTheme().headline6!.copyWith(
+            fontSize: 20,
+            color: DeliveryColors.white,
+            fontWeight: FontWeight.bold)),
     scaffoldBackgroundColor: DeliveryColors.dark,
     bottomAppBarColor: Colors.transparent,
     textTheme: GoogleFonts.poppinsTextTheme().apply(

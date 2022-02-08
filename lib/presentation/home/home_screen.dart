@@ -1,3 +1,5 @@
+import 'package:delivery_app/presentation/home/cart/cart_screen.dart';
+import 'package:delivery_app/presentation/home/products/products_screen.dart';
 import 'package:delivery_app/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -18,10 +20,17 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Expanded(
               child: IndexedStack(
+            index: currentIndex,
             children: [
+              ProductsScreen(),
               Text('currentInd: $currentIndex'),
-              Text('currentInd: $currentIndex'),
-              Text('currentInd: $currentIndex'),
+              CartScreen(
+                onShopping: () {
+                  setState(() {
+                    currentIndex = 0;
+                  });
+                },
+              ),
               Text('currentInd: $currentIndex'),
               Text('currentInd: $currentIndex'),
             ],

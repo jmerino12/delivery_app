@@ -1,4 +1,5 @@
 import 'package:delivery_app/presentation/home/home_screen.dart';
+import 'package:delivery_app/presentation/widgets/delivery_botton.dart';
 import 'package:delivery_app/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -112,31 +113,14 @@ class LoginScreen extends StatelessWidget {
                 ),
               )),
           Padding(
-            padding: const EdgeInsets.all(25),
-            child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  gradient: LinearGradient(
-                      colors: deliveryGradiant,
-                      begin: Alignment.centerRight,
-                      end: Alignment.centerLeft)),
-              child: Padding(
-                padding: const EdgeInsets.all(14),
-                child: InkWell(
-                  onTap: (() {
-                    Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (_) => HomeScreen()));
-                  }),
-                  child: Text(
-                    "Login",
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.caption!.copyWith(
-                        fontWeight: FontWeight.bold, color: Colors.white),
-                  ),
-                ),
-              ),
-            ),
-          )
+              padding: const EdgeInsets.all(25),
+              child: DeliveryButton(
+                text: 'Loging',
+                onTap: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (_) => HomeScreen()));
+                },
+              ))
         ],
       ),
     );
