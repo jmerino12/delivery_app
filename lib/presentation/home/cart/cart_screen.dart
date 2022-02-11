@@ -1,8 +1,8 @@
 import 'package:delivery_app/data/in_memory_product.dart';
+import 'package:delivery_app/domain/model/product.dart';
 import 'package:delivery_app/theme.dart';
 import 'package:flutter/material.dart';
 
-import '../../../domain/product.dart';
 import '../../widgets/delivery_botton.dart';
 
 class CartScreen extends StatelessWidget {

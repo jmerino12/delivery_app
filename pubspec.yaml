@@ -26,13 +26,15 @@ dependencies:
 
 
   cupertino_icons: ^1.0.2
+  get: ^4.6.1
+  google_fonts: ^2.3.1
+  shared_preferences: ^2.0.13
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^1.0.0
-  google_fonts: ^2.3.1
 
 flutter:
 

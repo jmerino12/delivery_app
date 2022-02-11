@@ -1,4 +1,4 @@
-import 'package:delivery_app/domain/product.dart';
+import 'package:delivery_app/domain/model/product.dart';
 
 final products = [
   const Product(
