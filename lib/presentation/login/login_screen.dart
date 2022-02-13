@@ -1,8 +1,6 @@
-import 'package:delivery_app/presentation/home/home_screen.dart';
 import 'package:delivery_app/presentation/widgets/delivery_botton.dart';
 import 'package:delivery_app/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 const logoSize = 50.0;
 
@@ -116,10 +114,7 @@ class LoginScreen extends StatelessWidget {
               padding: const EdgeInsets.all(25),
               child: DeliveryButton(
                 text: 'Loging',
-                onTap: () {
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (_) => HomeScreen()));
-                },
+                onTap: () {},
               ))
         ],
       ),
