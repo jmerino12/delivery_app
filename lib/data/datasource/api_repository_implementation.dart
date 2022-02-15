@@ -1,6 +1,8 @@
 import 'dart:math';
 
+import 'package:delivery_app/data/in_memory_product.dart';
 import 'package:delivery_app/domain/exception/auth_exception.dart';
+import 'package:delivery_app/domain/model/product.dart';
 import 'package:delivery_app/domain/model/user.dart';
 import 'package:delivery_app/domain/repository/api_repository.dart';
 import 'package:delivery_app/domain/response/login_response.dart';
@@ -40,5 +42,11 @@ class ApiRespositoryImpl extends ApiRepositoryInterface {
     await Future.delayed(const Duration(seconds: 2));
     print("Removing token from the server");
     return;
+  }
+
+  @override
+  Future<List<Product>> getProduct() async {
+    await Future.delayed(const Duration(seconds: 1));
+    return products;
   }
 }

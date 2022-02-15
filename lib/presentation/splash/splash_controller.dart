@@ -20,7 +20,7 @@ class SplashController extends GetxController {
 
   @override
   void onInit() {
-    //validateTheme();
+    validateTheme();
     super.onInit();
   }
 
