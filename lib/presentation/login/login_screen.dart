@@ -1,11 +1,23 @@
+import 'package:delivery_app/presentation/login/login_controller.dart';
+import 'package:delivery_app/presentation/routes/routes_delivery.dart';
 import 'package:delivery_app/presentation/widgets/delivery_botton.dart';
 import 'package:delivery_app/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 const logoSize = 50.0;
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends GetWidget<LoginController> {
   const LoginScreen({Key? key}) : super(key: key);
+
+  void login() async {
+    final result = await controller.login();
+    if (result) {
+      Get.offAllNamed(DeliveryRoutes.home);
+    } else {
+      Get.snackbar('Error', 'Revisa tus credenciales.');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,111 +25,128 @@ class LoginScreen extends StatelessWidget {
     final width = size.width;
     const moreSize = 50.0;
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            flex: 2,
-            child: Stack(
-              children: [
-                Positioned(
-                    bottom: logoSize,
-                    left: -moreSize / 2,
-                    right: -moreSize / 2,
-                    height: width + moreSize,
-                    child: Container(
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                              colors: deliveryGradiant,
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              stops: const [0.5, 1.0]),
-                          borderRadius: BorderRadius.vertical(
-                              bottom: Radius.circular(size.width / 2))),
-                    )),
-                Align(
-                    alignment: Alignment.bottomCenter,
-                    child: CircleAvatar(
-                        radius: logoSize,
-                        backgroundColor: Theme.of(context).canvasColor,
-                        child: Padding(
-                            padding: const EdgeInsets.all(12),
-                            child: Image.asset(
-                              'assets/logo.png',
-                              color: Theme.of(context).colorScheme.secondary,
-                            ))))
-              ],
+      body: Stack(children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              flex: 2,
+              child: Stack(
+                children: [
+                  Positioned(
+                      bottom: logoSize,
+                      left: -moreSize / 2,
+                      right: -moreSize / 2,
+                      height: width + moreSize,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                                colors: deliveryGradiant,
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                stops: const [0.5, 1.0]),
+                            borderRadius: BorderRadius.vertical(
+                                bottom: Radius.circular(size.width / 2))),
+                      )),
+                  Align(
+                      alignment: Alignment.bottomCenter,
+                      child: CircleAvatar(
+                          radius: logoSize,
+                          backgroundColor: Theme.of(context).canvasColor,
+                          child: Padding(
+                              padding: const EdgeInsets.all(12),
+                              child: Image.asset(
+                                'assets/logo.png',
+                                color: Theme.of(context).colorScheme.secondary,
+                              ))))
+                ],
+              ),
             ),
-          ),
-          Expanded(
-              flex: 4,
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      Text(
-                        "Login",
-                        style: Theme.of(context).textTheme.headline5!.copyWith(
+            Expanded(
+                flex: 4,
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        Text(
+                          "Login",
+                          style:
+                              Theme.of(context).textTheme.headline5!.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          "Username",
+                          textAlign: TextAlign.start,
+                          style: Theme.of(context).textTheme.caption!.copyWith(
                               fontWeight: FontWeight.bold,
-                            ),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        "Username",
-                        textAlign: TextAlign.start,
-                        style: Theme.of(context).textTheme.caption!.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context)
-                                .inputDecorationTheme
-                                .labelStyle!
-                                .color),
-                      ),
-                      TextField(
-                        decoration: InputDecoration(
-                            hintText: "username",
-                            prefixIcon: Icon(Icons.person_outline,
-                                color: Theme.of(context).iconTheme.color)),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        "Password",
-                        style: Theme.of(context).textTheme.caption!.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context)
-                                .inputDecorationTheme
-                                .labelStyle!
-                                .color),
-                      ),
-                      TextField(
-                        decoration: InputDecoration(
-                            hintText: "password",
-                            prefixIcon: Icon(
-                              Icons.lock_clock_sharp,
-                              color: Theme.of(context).iconTheme.color!,
-                            )),
-                      ),
-                    ],
+                              color: Theme.of(context)
+                                  .inputDecorationTheme
+                                  .labelStyle!
+                                  .color),
+                        ),
+                        TextField(
+                          controller: controller.usernameTextController,
+                          decoration: InputDecoration(
+                              hintText: "username",
+                              prefixIcon: Icon(Icons.person_outline,
+                                  color: Theme.of(context).iconTheme.color)),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          "Password",
+                          style: Theme.of(context).textTheme.caption!.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context)
+                                  .inputDecorationTheme
+                                  .labelStyle!
+                                  .color),
+                        ),
+                        TextField(
+                          controller: controller.passwordTextController,
+                          decoration: InputDecoration(
+                              hintText: "password",
+                              prefixIcon: Icon(
+                                Icons.lock_clock_sharp,
+                                color: Theme.of(context).iconTheme.color!,
+                              )),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              )),
-          Padding(
-              padding: const EdgeInsets.all(25),
-              child: DeliveryButton(
-                text: 'Loging',
-                onTap: () {},
-              ))
-        ],
-      ),
+                )),
+            Padding(
+                padding: const EdgeInsets.all(25),
+                child: DeliveryButton(
+                  text: 'Login',
+                  onTap: login,
+                ))
+          ],
+        ),
+        Positioned.fill(child: Obx(() {
+          if (controller.loginState.value == LoginState.loading) {
+            return Container(
+              color: Colors.black26,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          } else {
+            return SizedBox.shrink();
+          }
+        }))
+      ]),
     );
   }
 }

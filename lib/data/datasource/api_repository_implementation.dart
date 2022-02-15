@@ -11,7 +11,7 @@ class ApiRespositoryImpl extends ApiRepositoryInterface {
   Future<User> getUserFromToken(String token) async {
     //hhtp aqui se conectar a http o Firebase
 
-    await Future.delayed(const Duration(seconds: 4));
+    await Future.delayed(const Duration(seconds: 2));
     if (token == "AA111") {
       return const User(name: "Steve Jobs", username: "stevejobs", image: '');
     } else if (token == "AA222") {
@@ -22,7 +22,7 @@ class ApiRespositoryImpl extends ApiRepositoryInterface {
 
   @override
   Future<LoginResponse> login(LoginRequest loginRequest) async {
-    await Future.delayed(const Duration(seconds: 4));
+    await Future.delayed(const Duration(seconds: 2));
     if (loginRequest.username == "stevejobs" &&
         loginRequest.password == 'jobs') {
       return const LoginResponse(
@@ -37,7 +37,7 @@ class ApiRespositoryImpl extends ApiRepositoryInterface {
 
   @override
   Future<void> logout(String token) async {
-    await Future.delayed(const Duration(seconds: 4));
+    await Future.delayed(const Duration(seconds: 2));
     print("Removing token from the server");
     return;
   }

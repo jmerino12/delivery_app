@@ -1,10 +1,10 @@
 import 'package:delivery_app/presentation/splash/splash_controller.dart';
 import 'package:delivery_app/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
 
 class SplashScreen extends GetWidget<SplashController> {
-  const SplashScreen({Key? key}) : super(key: key);
+  final splashController = Get.find<SplashController>();
 
   @override
   Widget build(BuildContext context) {

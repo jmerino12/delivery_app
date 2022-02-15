@@ -1,4 +1,5 @@
 import 'package:delivery_app/presentation/home/home_screen.dart';
+import 'package:delivery_app/presentation/login/login_binding.dart';
 import 'package:delivery_app/presentation/login/login_screen.dart';
 import 'package:delivery_app/presentation/splash/splash_binding.dart';
 import 'package:delivery_app/presentation/splash/splash_screen.dart';
@@ -16,7 +17,10 @@ class DeliveryPages {
         name: DeliveryRoutes.splash,
         page: () => SplashScreen(),
         binding: SplashBinding()),
+    GetPage(
+        name: DeliveryRoutes.login,
+        page: () => LoginScreen(),
+        binding: LoginBinding()),
     GetPage(name: DeliveryRoutes.home, page: () => HomeScreen()),
-    GetPage(name: DeliveryRoutes.login, page: () => LoginScreen()),
   ];
 }
