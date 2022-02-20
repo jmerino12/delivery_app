@@ -8,6 +8,8 @@ class HomeController extends GetxController {
 
   late Rx<User> user = User.empty().obs;
 
+  RxInt indexSelected = 0.obs;
+
   @override
   void onReady() {
     loadUser();
@@ -17,5 +19,9 @@ class HomeController extends GetxController {
   void loadUser() async {
     final currentUser = await localRepositoryInterface.getUser();
     user(currentUser);
+  }
+
+  void updateIndexSelected(int index) {
+    indexSelected(index);
   }
 }

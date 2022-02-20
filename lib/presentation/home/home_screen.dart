@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends GetWidget<HomeController> {
-  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,20 +14,27 @@ class HomeScreen extends GetWidget<HomeController> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
-              child: IndexedStack(
-            index: currentIndex,
-            children: [
-              ProductsScreen(),
-              Placeholder(),
-              CartScreen(
-                onShopping: () {},
-              ),
-              Placeholder(),
-              ProfileScreen()
-            ],
+              child: Obx(
+            () => IndexedStack(
+              index: controller.indexSelected.value,
+              children: [
+                ProductsScreen(),
+                const Placeholder(),
+                CartScreen(
+                  onShopping: () {},
+                ),
+                const Placeholder(),
+                ProfileScreen()
+              ],
+            ),
           )),
-          _DeliveryNavigationBar(
-              index: currentIndex, onIndexSelected: (index) {})
+          Obx(
+            () => _DeliveryNavigationBar(
+                index: controller.indexSelected.value,
+                onIndexSelected: (index) {
+                  controller.updateIndexSelected(index);
+                }),
+          )
         ],
       ),
     );
