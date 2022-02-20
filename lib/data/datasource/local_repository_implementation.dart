@@ -40,9 +40,10 @@ class LocalRepositoryImpl extends LocalRepositoryInterface {
   @override
   Future<User> saveUser(User user) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    final username = sharedPreferences.setString(_pref_username, user.username);
+    final username =
+        sharedPreferences.setString(_pref_username, user.username!);
     final image = sharedPreferences.setString(_pref_image, user.image!);
-    final name = sharedPreferences.setString(_pref_name, user.name);
+    final name = sharedPreferences.setString(_pref_name, user.name!);
     return user;
   }
 

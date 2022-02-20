@@ -1,3 +1,4 @@
+import 'package:delivery_app/presentation/home/home_binding.dart';
 import 'package:delivery_app/presentation/home/home_screen.dart';
 import 'package:delivery_app/presentation/login/login_binding.dart';
 import 'package:delivery_app/presentation/login/login_screen.dart';
@@ -21,6 +22,9 @@ class DeliveryPages {
         name: DeliveryRoutes.login,
         page: () => LoginScreen(),
         binding: LoginBinding()),
-    GetPage(name: DeliveryRoutes.home, page: () => HomeScreen()),
+    GetPage(
+        name: DeliveryRoutes.home,
+        page: () => HomeScreen(),
+        binding: HomeBinding()),
   ];
 }

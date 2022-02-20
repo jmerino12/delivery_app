@@ -15,9 +15,15 @@ class ApiRespositoryImpl extends ApiRepositoryInterface {
 
     await Future.delayed(const Duration(seconds: 2));
     if (token == "AA111") {
-      return const User(name: "Steve Jobs", username: "stevejobs", image: '');
+      return const User(
+          name: "Steve Jobs",
+          username: "stevejobs",
+          image: 'assets/stevejobs.jpeg');
     } else if (token == "AA222") {
-      return const User(name: "Elon Musk", username: "elonmusk", image: '');
+      return const User(
+          name: "Elon Musk",
+          username: "elonmusk",
+          image: 'assets/elonmusk.jpeg');
     }
     throw AuthException();
   }

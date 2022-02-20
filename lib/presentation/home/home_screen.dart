@@ -1,17 +1,12 @@
 import 'package:delivery_app/presentation/home/cart/cart_screen.dart';
+import 'package:delivery_app/presentation/home/home_controller.dart';
 import 'package:delivery_app/presentation/home/products/products_screen.dart';
 import 'package:delivery_app/presentation/home/profile/profile_screen.dart';
 import 'package:delivery_app/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreen extends GetWidget<HomeController> {
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -24,25 +19,16 @@ class _HomeScreenState extends State<HomeScreen> {
             index: currentIndex,
             children: [
               ProductsScreen(),
-              Text('currentInd: $currentIndex'),
+              Placeholder(),
               CartScreen(
-                onShopping: () {
-                  setState(() {
-                    currentIndex = 0;
-                  });
-                },
+                onShopping: () {},
               ),
-              Text('currentInd: $currentIndex'),
+              Placeholder(),
               ProfileScreen()
             ],
           )),
           _DeliveryNavigationBar(
-              index: currentIndex,
-              onIndexSelected: (index) {
-                setState(() {
-                  currentIndex = index;
-                });
-              })
+              index: currentIndex, onIndexSelected: (index) {})
         ],
       ),
     );
@@ -52,7 +38,8 @@ class _HomeScreenState extends State<HomeScreen> {
 class _DeliveryNavigationBar extends StatelessWidget {
   final int index;
   final ValueChanged<int> onIndexSelected;
-  const _DeliveryNavigationBar(
+  final controller = Get.find<HomeController>();
+  _DeliveryNavigationBar(
       {Key? key, required this.index, required this.onIndexSelected})
       : super(key: key);
 
@@ -113,10 +100,15 @@ class _DeliveryNavigationBar extends StatelessWidget {
               ),
               InkWell(
                 onTap: () => onIndexSelected(4),
-                child: CircleAvatar(
-                  radius: 15,
-                  backgroundColor: Colors.red,
-                ),
+                child: Obx(() {
+                  final user = controller.user.value;
+                  return user.image == null
+                      ? const SizedBox.shrink()
+                      : CircleAvatar(
+                          radius: 15,
+                          backgroundImage: AssetImage(user.image!),
+                        );
+                }),
               ),
             ],
           ),
