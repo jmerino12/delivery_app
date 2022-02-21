@@ -11,7 +11,7 @@ class ProductsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Products"),
+          title: const Text("Products"),
         ),
         body: GridView.builder(
             padding: const EdgeInsets.all(20),

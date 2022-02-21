@@ -4,6 +4,8 @@ import 'package:get/instance_manager.dart';
 class HomeBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => HomeController(localRepositoryInterface: Get.find()));
+    Get.lazyPut(() => HomeController(
+        localRepositoryInterface: Get.find(),
+        apiRepositoryInterface: Get.find()));
   }
 }
