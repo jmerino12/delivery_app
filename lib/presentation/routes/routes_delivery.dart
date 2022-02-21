@@ -22,7 +22,7 @@ class DeliveryPages {
     GetPage(
         name: DeliveryRoutes.login,
         page: () => LoginScreen(),
-        bindings: [LoginBinding(), MainBinding()]),
+        bindings: [LoginBinding(), MainBinding()]), //bingind: [LoginBinding()]
     GetPage(
         name: DeliveryRoutes.home,
         page: () => HomeScreen(),
