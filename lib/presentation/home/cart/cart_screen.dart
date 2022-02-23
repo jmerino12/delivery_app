@@ -44,6 +44,15 @@ class _FullCart extends GetWidget<CartController> {
                     final product = controller.cartList[index];
                     return _ShoppingCardProduct(
                       productCart: product,
+                      onDelete: () {
+                        controller.remove(product);
+                      },
+                      onAdd: () {
+                        controller.increment(product);
+                      },
+                      onSubstract: () {
+                        controller.removeQuantity(product);
+                      },
                     );
                   }),
             ),
@@ -128,14 +137,16 @@ class _FullCart extends GetWidget<CartController> {
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold),
                               ),
-                              Text("\$85.00 USD",
-                                  style: TextStyle(
-                                      color: Theme.of(context)
-                                          .inputDecorationTheme
-                                          .labelStyle!
-                                          .color,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold)),
+                              Obx(
+                                () => Text('\$${controller.totalPrice} USD',
+                                    style: TextStyle(
+                                        color: Theme.of(context)
+                                            .inputDecorationTheme
+                                            .labelStyle!
+                                            .color,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold)),
+                              ),
                             ],
                           ),
                         ],
@@ -154,7 +165,15 @@ class _FullCart extends GetWidget<CartController> {
 
 class _ShoppingCardProduct extends StatelessWidget {
   final ProductCart productCart;
-  const _ShoppingCardProduct({Key? key, required this.productCart})
+  final VoidCallback onDelete;
+  final VoidCallback onAdd;
+  final VoidCallback onSubstract;
+  _ShoppingCardProduct(
+      {Key? key,
+      required this.productCart,
+      required this.onDelete,
+      required this.onAdd,
+      required this.onSubstract})
       : super(key: key);
 
   @override
@@ -211,7 +230,7 @@ class _ShoppingCardProduct extends StatelessWidget {
                         child: Row(
                           children: [
                             InkWell(
-                              onTap: () {},
+                              onTap: onSubstract,
                               child: Container(
                                 decoration: BoxDecoration(
                                     color: DeliveryColors.white,
@@ -228,7 +247,7 @@ class _ShoppingCardProduct extends StatelessWidget {
                               child: Text(productCart.quantity.toString()),
                             ),
                             InkWell(
-                              onTap: () {},
+                              onTap: onAdd,
                               child: Container(
                                 decoration: BoxDecoration(
                                     color: DeliveryColors.purple,
@@ -255,7 +274,7 @@ class _ShoppingCardProduct extends StatelessWidget {
         Positioned(
             right: 0,
             child: InkWell(
-              onTap: () {},
+              onTap: onDelete,
               child: CircleAvatar(
                 backgroundColor: DeliveryColors.pink,
                 child: Icon(Icons.delete_outline),
