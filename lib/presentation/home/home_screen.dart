@@ -1,3 +1,4 @@
+import 'package:delivery_app/presentation/home/cart/cart_controller.dart';
 import 'package:delivery_app/presentation/home/cart/cart_screen.dart';
 import 'package:delivery_app/presentation/home/home_controller.dart';
 import 'package:delivery_app/presentation/home/products/products_screen.dart';
@@ -45,6 +46,8 @@ class _DeliveryNavigationBar extends StatelessWidget {
   final int index;
   final ValueChanged<int> onIndexSelected;
   final controller = Get.find<HomeController>();
+  final cartController = Get.find<CartController>();
+
   _DeliveryNavigationBar(
       {Key? key, required this.index, required this.onIndexSelected})
       : super(key: key);
@@ -83,16 +86,34 @@ class _DeliveryNavigationBar extends StatelessWidget {
                 ),
               ),
               Material(
-                child: CircleAvatar(
-                  backgroundColor: DeliveryColors.purple,
-                  radius: 23,
-                  child: IconButton(
-                    color: index == 2
-                        ? DeliveryColors.white
-                        : DeliveryColors.ligthGrey,
-                    icon: Icon(Icons.shopping_basket),
-                    onPressed: () => onIndexSelected(2),
-                  ),
+                child: Stack(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: DeliveryColors.purple,
+                      radius: 23,
+                      child: IconButton(
+                        color: index == 2
+                            ? DeliveryColors.white
+                            : DeliveryColors.ligthGrey,
+                        icon: Icon(Icons.shopping_basket),
+                        onPressed: () => onIndexSelected(2),
+                      ),
+                    ),
+                    Positioned(
+                      child: Obx(
+                        () => cartController.totalItem.value == 0
+                            ? const SizedBox.shrink()
+                            : CircleAvatar(
+                                radius: 10,
+                                backgroundColor: Colors.pinkAccent,
+                                child: Text(
+                                  cartController.totalItem.value.toString(),
+                                ),
+                              ),
+                      ),
+                      right: 0,
+                    )
+                  ],
                 ),
               ),
               Material(

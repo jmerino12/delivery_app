@@ -1,5 +1,5 @@
-import 'package:delivery_app/data/in_memory_product.dart';
 import 'package:delivery_app/domain/model/product.dart';
+import 'package:delivery_app/presentation/home/cart/cart_controller.dart';
 import 'package:delivery_app/presentation/home/products/products_controller.dart';
 import 'package:delivery_app/presentation/widgets/delivery_botton.dart';
 import 'package:delivery_app/theme.dart';
@@ -11,6 +11,8 @@ class ProductsScreen extends StatelessWidget {
 
   final controller = Get.put<ProductsController>(
       ProductsController(apiRepositoryInterface: Get.find()));
+  final cartController = Get.find<CartController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +30,11 @@ class ProductsScreen extends StatelessWidget {
                   itemCount: controller.productsList.length,
                   itemBuilder: (context, index) {
                     final product = controller.productsList[index];
-                    return _ItemProduct(product: product);
+                    return _ItemProduct(
+                        product: product,
+                        onTap: () {
+                          cartController.add(product);
+                        });
                   })
               : const Center(
                   child: CircularProgressIndicator(),
@@ -39,7 +45,9 @@ class ProductsScreen extends StatelessWidget {
 
 class _ItemProduct extends StatelessWidget {
   final Product product;
-  const _ItemProduct({Key? key, required this.product}) : super(key: key);
+  final VoidCallback onTap;
+  const _ItemProduct({Key? key, required this.product, required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +103,7 @@ class _ItemProduct extends StatelessWidget {
               ),
             ),
             DeliveryButton(
-              onTap: () {},
+              onTap: onTap,
               text: "Add",
               padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
             )
