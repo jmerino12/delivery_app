@@ -22,7 +22,9 @@ class HomeScreen extends GetWidget<HomeController> {
                 ProductsScreen(),
                 const Placeholder(),
                 CartScreen(
-                  onShopping: () {},
+                  onShopping: () {
+                    controller.indexSelected.value = 0;
+                  },
                 ),
                 const Placeholder(),
                 ProfileScreen()

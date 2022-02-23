@@ -1,14 +1,15 @@
-import 'package:delivery_app/data/in_memory_product.dart';
-import 'package:delivery_app/domain/model/product.dart';
+import 'package:delivery_app/domain/model/product_cart.dart';
+import 'package:delivery_app/presentation/home/cart/cart_controller.dart';
 import 'package:delivery_app/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../widgets/delivery_botton.dart';
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends GetWidget<CartController> {
   final VoidCallback onShopping;
 
-  const CartScreen({Key? key, required this.onShopping}) : super(key: key);
+  CartScreen({Key? key, required this.onShopping}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,12 +17,14 @@ class CartScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text("Shopping cart"),
         ),
-        body: _FullCart());
+        body: Obx(() => controller.totalItem.value == 0
+            ? _EmptyCart(onShopping: onShopping)
+            : _FullCart()));
   }
 }
 
-class _FullCart extends StatelessWidget {
-  const _FullCart({Key? key}) : super(key: key);
+class _FullCart extends GetWidget<CartController> {
+  _FullCart({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,15 +35,18 @@ class _FullCart extends StatelessWidget {
           flex: 3,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: ListView.builder(
-                itemExtent: 230,
-                scrollDirection: Axis.horizontal,
-                itemCount: products.length,
-                itemBuilder: (context, index) {
-                  return _ShoppingCardProduct(
-                    product: products[index],
-                  );
-                }),
+            child: Obx(
+              () => ListView.builder(
+                  itemExtent: 230,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: controller.cartList.value.length,
+                  itemBuilder: (context, index) {
+                    final product = controller.cartList[index];
+                    return _ShoppingCardProduct(
+                      productCart: product,
+                    );
+                  }),
+            ),
           ),
         ),
         Expanded(
@@ -147,8 +153,8 @@ class _FullCart extends StatelessWidget {
 }
 
 class _ShoppingCardProduct extends StatelessWidget {
-  final Product product;
-  const _ShoppingCardProduct({Key? key, required this.product})
+  final ProductCart productCart;
+  const _ShoppingCardProduct({Key? key, required this.productCart})
       : super(key: key);
 
   @override
@@ -173,7 +179,7 @@ class _ShoppingCardProduct extends StatelessWidget {
                           child: Padding(
                         padding: const EdgeInsets.all(5.0),
                         child: Image.asset(
-                          product.image,
+                          productCart.product.image,
                           fit: BoxFit.cover,
                         ),
                       )),
@@ -184,12 +190,12 @@ class _ShoppingCardProduct extends StatelessWidget {
                   flex: 3,
                   child: Column(
                     children: [
-                      Text(product.name),
+                      Text(productCart.product.name),
                       const SizedBox(
                         height: 10,
                       ),
                       Text(
-                        product.description,
+                        productCart.product.description,
                         style: Theme.of(context)
                             .textTheme
                             .overline!
@@ -219,7 +225,7 @@ class _ShoppingCardProduct extends StatelessWidget {
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Text("2"),
+                              child: Text(productCart.quantity.toString()),
                             ),
                             InkWell(
                               onTap: () {},
@@ -233,7 +239,7 @@ class _ShoppingCardProduct extends StatelessWidget {
                             ),
                             Spacer(),
                             Text(
-                              '\$${product.price}',
+                              '\$${productCart.product.price}',
                               style: TextStyle(color: DeliveryColors.green),
                             ),
                           ],
