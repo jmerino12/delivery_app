@@ -5,7 +5,6 @@ import 'package:delivery_app/presentation/login/login_bloc.dart';
 import 'package:delivery_app/presentation/widgets/delivery_botton.dart';
 import 'package:delivery_app/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 const logoSize = 50.0;
