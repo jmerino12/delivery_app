@@ -1,4 +1,4 @@
-import 'package:delivery_app/presentation/home/home_controller.dart';
+import 'package:delivery_app/presentation/home/home_bloc.dart';
 import 'package:delivery_app/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,22 +6,22 @@ import 'package:get/get.dart';
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({Key? key}) : super(key: key);
 
-  final controller = Get.find<HomeController>();
+  final controller = Get.find<HomeBLoC>();
 
   Future<void> logout() async {
-    await controller.logout();
+    //await controller.logout();
     //Get.offAllNamed(DeliveryRoutes.splash);
   }
 
   void onThemeUpdated(bool isDark) {
-    controller.updateTheme(isDark);
+//controller.updateTheme(isDark);
     Get.changeTheme(isDark ? darkTheme : ligthTheme);
   }
 
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      final user = controller.user.value;
+      final user = controller.user;
       return Scaffold(
         appBar: AppBar(
           title: const Text("Profile"),
@@ -114,8 +114,7 @@ class ProfileScreen extends StatelessWidget {
                                             const Spacer(),
                                             Obx(
                                               () => Switch(
-                                                  value: controller
-                                                      .darkTheme.value,
+                                                  value: true,
                                                   onChanged: onThemeUpdated,
                                                   activeColor:
                                                       DeliveryColors.purple),

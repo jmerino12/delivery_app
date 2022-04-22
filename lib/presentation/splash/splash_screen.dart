@@ -1,4 +1,3 @@
-import 'package:delivery_app/data/datasource/api_repository_implementation.dart';
 import 'package:delivery_app/domain/repository/api_repository.dart';
 import 'package:delivery_app/domain/repository/local_storage_repository.dart';
 import 'package:delivery_app/presentation/home/home_screen.dart';
@@ -29,8 +28,8 @@ class _SplashScreenState extends State<SplashScreen> {
     final bloc = context.read<SplashBLoC>();
     final result = await bloc.validateSession();
     if (result) {
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (_) => HomeScreen()));
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => HomeScreen.init(context)));
     } else {
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (_) => LoginScreen()));
