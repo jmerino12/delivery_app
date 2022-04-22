@@ -1,6 +1,6 @@
 import 'package:delivery_app/domain/model/product.dart';
 import 'package:delivery_app/domain/repository/api_repository.dart';
-import 'package:delivery_app/presentation/home/cart/cart_controller.dart';
+import 'package:delivery_app/presentation/home/cart/cart_bloc.dart';
 import 'package:delivery_app/presentation/home/products/products_bloc.dart';
 import 'package:delivery_app/presentation/widgets/delivery_botton.dart';
 import 'package:delivery_app/theme.dart';
@@ -22,6 +22,7 @@ class ProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productBloc = context.watch<ProductsBLoC>();
+    final cartBloc = context.watch<CartBLoC>();
     return Scaffold(
         appBar: AppBar(
           title: const Text("Products"),
@@ -39,7 +40,7 @@ class ProductsScreen extends StatelessWidget {
                   return _ItemProduct(
                       product: product,
                       onTap: () {
-                        //cartController.add(product);
+                        cartBloc.add(product);
                       });
                 })
             : const Center(

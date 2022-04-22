@@ -1,8 +1,9 @@
 import 'package:delivery_app/domain/repository/api_repository.dart';
 import 'package:delivery_app/domain/repository/local_storage_repository.dart';
-import 'package:delivery_app/presentation/home/cart/cart_controller.dart';
+import 'package:delivery_app/presentation/home/cart/cart_bloc.dart';
 import 'package:delivery_app/presentation/home/cart/cart_screen.dart';
 import 'package:delivery_app/presentation/home/home_bloc.dart';
+import 'package:delivery_app/presentation/home/products/products_bloc.dart';
 import 'package:delivery_app/presentation/home/products/products_screen.dart';
 import 'package:delivery_app/presentation/home/profile/profile_screen.dart';
 import 'package:delivery_app/theme.dart';
@@ -35,13 +36,11 @@ class HomeScreen extends StatelessWidget {
               children: [
                 ProductsScreen.init(context),
                 const Placeholder(),
-                const Placeholder() /*??
-                    CartScreen(
-                      onShopping: () {
-                        bloc.updateIndexSelected(0);
-                      },
-                    ),*/
-                ,
+                CartScreen(
+                  onShopping: () {
+                    bloc.updateIndexSelected(0);
+                  },
+                ),
                 const Placeholder(),
                 ProfileScreen.init(context)
               ],
@@ -69,6 +68,7 @@ class _DeliveryNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = Provider.of<HomeBLoC>(context);
+    final cartBloc = Provider.of<CartBLoC>(context);
     final user = bloc.user;
 
     return Padding(
@@ -116,19 +116,18 @@ class _DeliveryNavigationBar extends StatelessWidget {
                         onPressed: () => onIndexSelected(2),
                       ),
                     ),
-                    /*Positioned(
-                      child:  cartController.totalItem.value == 0
-                            ? const SizedBox.shrink()
-                            : CircleAvatar(
-                                radius: 10,
-                                backgroundColor: Colors.pinkAccent,
-                                child: Text(
-                                  cartController.totalItem.value.toString(),
-                                ),
+                    Positioned(
+                      child: cartBloc.totalItem == 0
+                          ? const SizedBox.shrink()
+                          : CircleAvatar(
+                              radius: 10,
+                              backgroundColor: Colors.pinkAccent,
+                              child: Text(
+                                cartBloc.totalItem.toString(),
                               ),
-                      ,
+                            ),
                       right: 0,
-                    )*/
+                    )
                   ],
                 ),
               ),

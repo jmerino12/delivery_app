@@ -1,14 +1,14 @@
 import 'package:delivery_app/domain/model/product.dart';
 import 'package:delivery_app/domain/model/product_cart.dart';
-import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 
-class CartController extends GetxController {
-  RxList<ProductCart> cartList = <ProductCart>[].obs;
-  RxInt totalItem = 0.obs;
-  RxDouble totalPrice = 0.0.obs;
+class CartBLoC extends ChangeNotifier {
+  List<ProductCart> cartList = <ProductCart>[];
+  int totalItem = 0;
+  double totalPrice = 0.0;
 
   void add(Product product) {
-    final temp = List<ProductCart>.from(cartList.value);
+    final temp = List<ProductCart>.from(cartList);
     bool found = false;
     for (ProductCart p in temp) {
       if (p.product.name == product.name) {
@@ -20,20 +20,20 @@ class CartController extends GetxController {
     if (!found) {
       temp.add(ProductCart(product: product));
     }
-    cartList.value = List<ProductCart>.from(temp);
+    cartList = List<ProductCart>.from(temp);
     calculateTotal(temp);
   }
 
   void increment(ProductCart productCart) {
     productCart.quantity += 1;
-    cartList.value = List<ProductCart>.from(cartList.value);
-    calculateTotal(cartList.value);
+    cartList = List<ProductCart>.from(cartList);
+    calculateTotal(cartList);
   }
 
   void removeQuantity(ProductCart product) {
     product.quantity -= 1;
-    cartList.value = List<ProductCart>.from(cartList.value);
-    calculateTotal(cartList.value);
+    cartList = List<ProductCart>.from(cartList);
+    calculateTotal(cartList);
   }
 
   void calculateTotal(List<ProductCart> temp) {
@@ -46,12 +46,13 @@ class CartController extends GetxController {
         (previousValue, element) =>
             (element.quantity * element.product.price) +
             double.parse(previousValue.toString()));
-    totalItem(total);
-    totalPrice(price);
+    totalItem = total;
+    totalPrice = price;
+    notifyListeners();
   }
 
   void remove(ProductCart product) {
     cartList.remove(product);
-    calculateTotal(cartList.value);
+    calculateTotal(cartList);
   }
 }

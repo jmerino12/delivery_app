@@ -3,6 +3,7 @@ import 'package:delivery_app/data/datasource/local_repository_implementation.dar
 import 'package:delivery_app/domain/repository/api_repository.dart';
 import 'package:delivery_app/domain/repository/local_storage_repository.dart';
 import 'package:delivery_app/main_bloc.dart';
+import 'package:delivery_app/presentation/home/cart/cart_bloc.dart';
 import 'package:delivery_app/presentation/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget {
               localRepositoryInterface:
                   context.read<LocalRepositoryInterface>())
             ..loadTheme();
-        })
+        }),
+        ChangeNotifierProvider(create: (_) => CartBLoC())
       ],
       child: Builder(
         builder: (newContext) {
