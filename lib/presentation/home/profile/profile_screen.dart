@@ -1,5 +1,6 @@
 import 'package:delivery_app/domain/repository/api_repository.dart';
 import 'package:delivery_app/domain/repository/local_storage_repository.dart';
+import 'package:delivery_app/main_bloc.dart';
 import 'package:delivery_app/presentation/home/home_bloc.dart';
 import 'package:delivery_app/presentation/home/profile/profile_bloc.dart';
 import 'package:delivery_app/presentation/splash/splash_screen.dart';
@@ -32,6 +33,8 @@ class ProfileScreen extends StatelessWidget {
     final profileBloc = Provider.of<ProfileBLoC>(context, listen: false);
     profileBloc.updateTheme(isDark);
     //TODO: update global theme
+    final mainBloc = Provider.of<MainBLoC>(context);
+    mainBloc.loadTheme();
   }
 
   @override
