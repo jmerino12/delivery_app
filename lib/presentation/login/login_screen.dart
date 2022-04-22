@@ -1,5 +1,4 @@
 import 'package:delivery_app/presentation/login/login_controller.dart';
-import 'package:delivery_app/presentation/routes/routes_delivery.dart';
 import 'package:delivery_app/presentation/widgets/delivery_botton.dart';
 import 'package:delivery_app/theme.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +12,7 @@ class LoginScreen extends GetWidget<LoginController> {
   void login() async {
     final result = await controller.login();
     if (result) {
-      Get.offAllNamed(DeliveryRoutes.home);
+      //Get.offAllNamed(DeliveryRoutes.home);
     } else {
       Get.snackbar('Error', 'Revisa tus credenciales.');
     }

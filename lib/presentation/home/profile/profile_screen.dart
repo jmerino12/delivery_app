@@ -1,5 +1,4 @@
 import 'package:delivery_app/presentation/home/home_controller.dart';
-import 'package:delivery_app/presentation/routes/routes_delivery.dart';
 import 'package:delivery_app/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,7 +10,7 @@ class ProfileScreen extends StatelessWidget {
 
   Future<void> logout() async {
     await controller.logout();
-    Get.offAllNamed(DeliveryRoutes.splash);
+    //Get.offAllNamed(DeliveryRoutes.splash);
   }
 
   void onThemeUpdated(bool isDark) {

@@ -1,8 +1,11 @@
-import 'package:delivery_app/presentation/main_binding.dart';
-import 'package:delivery_app/presentation/routes/routes_delivery.dart';
+import 'package:delivery_app/data/datasource/api_repository_implementation.dart';
+import 'package:delivery_app/data/datasource/local_repository_implementation.dart';
+import 'package:delivery_app/domain/repository/api_repository.dart';
+import 'package:delivery_app/domain/repository/local_storage_repository.dart';
+import 'package:delivery_app/presentation/splash/splash_screen.dart';
 import 'package:delivery_app/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,12 +17,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ligthTheme,
-      initialRoute: DeliveryRoutes.splash,
-      getPages: DeliveryPages.pages,
-      initialBinding: MainBinding(),
+    return MultiProvider(
+      providers: [
+        Provider<ApiRepositoryInterface>(create: (_) => ApiRespositoryImpl()),
+        Provider<LocalRepositoryInterface>(
+            create: (_) => LocalRepositoryImpl()),
+      ],
+      child: Builder(
+        builder: (newContext) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ligthTheme,
+            home: SplashScreen.init(newContext),
+          );
+        },
+      ),
     );
   }
 }

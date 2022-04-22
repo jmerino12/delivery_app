@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:delivery_app/data/in_memory_product.dart';
 import 'package:delivery_app/domain/exception/auth_exception.dart';
 import 'package:delivery_app/domain/model/product.dart';
@@ -13,7 +11,7 @@ class ApiRespositoryImpl extends ApiRepositoryInterface {
   Future<User> getUserFromToken(String token) async {
     //hhtp aqui se conectar a http o Firebase
 
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     if (token == "AA111") {
       return const User(
           name: "Steve Jobs",
