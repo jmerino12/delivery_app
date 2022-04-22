@@ -3,7 +3,7 @@ import 'package:delivery_app/theme.dart';
 import 'package:flutter/material.dart';
 
 class MainBLoC extends ChangeNotifier {
-  ThemeData? currentTheme;
+  ThemeData? currentTheme = null;
   final LocalRepositoryInterface localRepositoryInterface;
 
   MainBLoC({required this.localRepositoryInterface});

@@ -32,8 +32,7 @@ class ProfileScreen extends StatelessWidget {
   void onThemeUpdated(bool isDark, BuildContext context) {
     final profileBloc = Provider.of<ProfileBLoC>(context, listen: false);
     profileBloc.updateTheme(isDark);
-    //TODO: update global theme
-    final mainBloc = Provider.of<MainBLoC>(context);
+    final mainBloc = context.read<MainBLoC>();
     mainBloc.loadTheme();
   }
 

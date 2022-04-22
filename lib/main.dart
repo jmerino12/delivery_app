@@ -4,7 +4,6 @@ import 'package:delivery_app/domain/repository/api_repository.dart';
 import 'package:delivery_app/domain/repository/local_storage_repository.dart';
 import 'package:delivery_app/main_bloc.dart';
 import 'package:delivery_app/presentation/splash/splash_screen.dart';
-import 'package:delivery_app/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

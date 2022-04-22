@@ -10,7 +10,7 @@ class HomeBLoC extends ChangeNotifier {
       {required this.localRepositoryInterface,
       required this.apiRepositoryInterface});
 
-  User? user;
+  User user = User.empty();
   int indexSelected = 0;
 
   void loadUser() async {

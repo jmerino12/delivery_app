@@ -21,11 +21,12 @@ class ProfileBLoC extends ChangeNotifier {
 
   void loadTheme() async {
     isDark = await localRepositoryInterface.getDarkMode() ?? false;
+    print(isDark);
     notifyListeners();
   }
 
   void updateTheme(bool isDarkValue) {
-    localRepositoryInterface.saveDarkMode(isDark);
+    localRepositoryInterface.saveDarkMode(isDarkValue);
     isDark = isDarkValue;
     notifyListeners();
   }

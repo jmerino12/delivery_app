@@ -33,14 +33,15 @@ class HomeScreen extends StatelessWidget {
             child: IndexedStack(
               index: bloc.indexSelected,
               children: [
-                const Placeholder() ?? ProductsScreen(),
+                const Placeholder(), //?? ProductsScreen(),
                 const Placeholder(),
-                const Placeholder() ??
+                const Placeholder() /*??
                     CartScreen(
                       onShopping: () {
                         bloc.updateIndexSelected(0);
                       },
-                    ),
+                    ),*/
+                ,
                 const Placeholder(),
                 ProfileScreen.init(context)
               ],
@@ -142,11 +143,11 @@ class _DeliveryNavigationBar extends StatelessWidget {
               ),
               InkWell(
                 onTap: () => onIndexSelected(4),
-                child: user?.image == null
+                child: user.image == null
                     ? const SizedBox.shrink()
                     : CircleAvatar(
                         radius: 15,
-                        backgroundImage: AssetImage(user!.image!),
+                        backgroundImage: AssetImage(user.image!),
                       ),
               ),
             ],
