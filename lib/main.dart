@@ -2,6 +2,7 @@ import 'package:delivery_app/data/datasource/api_repository_implementation.dart'
 import 'package:delivery_app/data/datasource/local_repository_implementation.dart';
 import 'package:delivery_app/domain/repository/api_repository.dart';
 import 'package:delivery_app/domain/repository/local_storage_repository.dart';
+import 'package:delivery_app/main_bloc.dart';
 import 'package:delivery_app/presentation/splash/splash_screen.dart';
 import 'package:delivery_app/theme.dart';
 import 'package:flutter/material.dart';
@@ -22,13 +23,25 @@ class MyApp extends StatelessWidget {
         Provider<ApiRepositoryInterface>(create: (_) => ApiRespositoryImpl()),
         Provider<LocalRepositoryInterface>(
             create: (_) => LocalRepositoryImpl()),
+        ChangeNotifierProvider(create: (context) {
+          return MainBLoC(
+              localRepositoryInterface:
+                  context.read<LocalRepositoryInterface>())
+            ..loadTheme();
+        })
       ],
       child: Builder(
         builder: (newContext) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            theme: ligthTheme,
-            home: SplashScreen.init(newContext),
+          return Consumer<MainBLoC>(
+            builder: (context, bloc, _) {
+              return bloc.currentTheme == null
+                  ? const SizedBox.shrink()
+                  : MaterialApp(
+                      debugShowCheckedModeBanner: false,
+                      theme: bloc.currentTheme,
+                      home: SplashScreen.init(newContext),
+                    );
+            },
           );
         },
       ),

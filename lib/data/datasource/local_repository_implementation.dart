@@ -6,7 +6,7 @@ const _pref_token = "TOKEN";
 const _pref_username = "USERNAME";
 const _pref_name = "NAME";
 const _pref_image = "IMAGE";
-const _pref_darktTheme = "IMAGE";
+const _pref_darktTheme = "DARK";
 
 class LocalRepositoryImpl extends LocalRepositoryInterface {
   @override

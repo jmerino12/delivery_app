@@ -42,7 +42,7 @@ class HomeScreen extends StatelessWidget {
                       },
                     ),
                 const Placeholder(),
-                const Placeholder() ?? ProfileScreen()
+                ProfileScreen.init(context)
               ],
             ),
           ),
